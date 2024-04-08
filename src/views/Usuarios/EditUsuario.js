@@ -9,21 +9,57 @@ import {
   CFormLabel,
   CFormTextarea,
   CRow,
-} from '@coreui/react'
-import React from 'react'
-import { ButtonLink } from '../../components/ButtonLinks'
+} from '@coreui/react';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
+import { ButtonLink } from '../../components/ButtonLinks';
 
 const FormEditUsuarios = () => {
+
+  const token = sessionStorage.getItem('token');
+  console.log(token);
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const cedula = searchParams.get('cedula'); // Retrieve the cedula value
+  console.log(cedula);
+
+  const preloadedValues = {
+    cedula: "123456"
+  }
+  const [values, setValues] = useState({
+    cedula:'',
+    correo:'',
+    contra:'',
+    nombre:'',
+    primerApellido:'',
+    segundoApellido:'',
+    rol:''
+  })
+  useEffect(() => {
+    fetch('http://localhost:8008/usuarios/admins', {
+      method: "GET",
+      headers: {
+        Authorization: token
+      }
+    })
+    .then(response => response.json())
+    .then(data => setRecords(data))
+    .catch(error => console.error('Error al consumir la API:', error));
+}, []); 
+
+
   return (
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Agregar Usuarios al Sistema</strong>
+            <strong>Modificar Usuario del Sistema</strong>
           </CCardHeader>
           <CCardBody>
             <p className="text-body-secondary small">
-              Llene los datos del usuario que desea agregar
+              Modifique los datos del usuario que desea cambiar
             </p>
             <br/>
               <CForm>
@@ -32,6 +68,7 @@ const FormEditUsuarios = () => {
                   <CFormInput
                     type="text"
                     id="exampleFormControlInput1"
+                    name="cedula"
                   />
                 </div>
                 <div className="mb-3">
@@ -65,7 +102,7 @@ const FormEditUsuarios = () => {
                 <br/>
                 <div className="col-auto">
                   <div className="d-grid gap-2">
-                    <ButtonLink to={"/Usuarios/verUsuarios"} className="btn btn-primary profile-button btn-lg">Agregar Usuario</ButtonLink>
+                    <ButtonLink to={"/Usuarios/verUsuarios"} className="btn btn-primary profile-button btn-lg">Modificar Usuario</ButtonLink>
             
                   </div>
                 </div>

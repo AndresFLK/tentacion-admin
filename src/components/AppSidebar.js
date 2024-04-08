@@ -37,7 +37,7 @@ const AppSidebar = () => {
     >
       <CSidebarHeader className="border-bottom" style={{ textAlign: 'center' }}>
         <CSidebarBrand to="/" style={{ margin: 'auto' }}>
-        <a href='http://localhost:3001/'><img src={TentacionLogo} alt="Logo" style={{ width: '150px', height: 'auto'  }}/></a>
+        <a href='http://localhost:5000/'><img src={TentacionLogo} alt="Logo" style={{ width: '150px', height: 'auto'  }}/></a>
         </CSidebarBrand>
         <CCloseButton
           className="d-lg-none"

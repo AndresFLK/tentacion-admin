@@ -24,12 +24,15 @@ import { ButtonLink } from '../../components/ButtonLinks'
 
 const TableUsuarios = () => {
 
+  const token = sessionStorage.getItem('token');
+  console.log(token);
+
   const [records, setRecords] = useState([])
     useEffect(() => {
         fetch('http://localhost:8008/usuarios/admins', {
           method: "GET",
           headers: {
-            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTE5MzA0MTEsImV4cCI6MTcxMTkzMTAxMSwiY2VkdWxhIjoiMzA1NDMwNjkyIiwibm9tYnJlIjoiR2FicmllbCIsInJvbCI6IkFETUlOIn0.q49XZQC-uRuoIxXKCgICQoVhw9guCEOQer6cDvKWRxY"
+            Authorization: token
           }
         })
         .then(response => response.json())
@@ -71,7 +74,12 @@ const TableUsuarios = () => {
                       <CTableDataCell>tel</CTableDataCell>
                       <CTableDataCell>{list.rol}</CTableDataCell>
                       <CTableDataCell>
-                        <ButtonLink to={"/Usuarios/editarUsuario"} className="btn btn-info profile-button">
+                        <ButtonLink to={{
+                                      pathname: "/Usuarios/editarUsuario",
+                                      search: `?cedula=${encodeURIComponent(list.cedula)}`
+                                    }}
+                          className="btn btn-info profile-button"
+                        >
                           <CIcon icon={cilPencil} className="me-2" />
                           Editar
                         </ButtonLink>

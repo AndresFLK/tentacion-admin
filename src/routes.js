@@ -6,8 +6,8 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 
 //Usuarios
 const TableUsuarios = React.lazy(() => import('./views/Usuarios/TableUsuarios'))
-const FormAddUsuarios = React.lazy(() => import('./views/Usuarios/EditUsuario'))
-const FormEditUsuarios = React.lazy(() => import('./views/Usuarios/CreateUsuario'))
+const FormAddUsuarios = React.lazy(() => import('./views/Usuarios/CreateUsuario'))
+const FormEditUsuarios = React.lazy(() => import('./views/Usuarios/EditUsuario'))
 
 //Inventario
 const TableInventario = React.lazy(() => import('./views/Inventario/TableInventario'))
