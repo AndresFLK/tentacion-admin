@@ -14,6 +14,21 @@ const TableInventario = React.lazy(() => import('./views/Inventario/TableInventa
 const FormAddItem = React.lazy(() => import('./views/Inventario/CreateItem'))
 const FormEditItem = React.lazy(() => import('./views/Inventario/EditItem'))
 
+//Proveedores
+const TableProveedores = React.lazy(() => import('./views/Proveedores/TableProveedores'))
+const FormAddProveedor = React.lazy(() => import('./views/Proveedores/CreateProveedor'))
+const FormEditProveedor = React.lazy(() => import('./views/Proveedores/EditProveedor'))
+
+//Empresas
+const TableEmpresas = React.lazy(() => import('./views/Empresas/TableEmpresas'))
+const FormAddEmpresa = React.lazy(() => import('./views/Empresas/CreateEmpresa'))
+const FormEditEmpresa = React.lazy(() => import('./views/Empresas/EditEmpresa'))
+
+//Servicios
+const TableServicios = React.lazy(() => import('./views/Servicios/TableServicios'))
+const FormAddServicio = React.lazy(() => import('./views/Servicios/CreateServicio'))
+const FormEditServicio = React.lazy(() => import('./views/Servicios/EditServicio'))
+
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -105,12 +120,27 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', element: Modals },
   { path: '/notifications/toasts', name: 'Toasts', element: Toasts },
   { path: '/widgets', name: 'Widgets', element: Widgets },
+  //
   { path: '/Usuarios/verUsuarios', name: 'TableUsuarios', element: TableUsuarios },
   { path: '/Usuarios/crearUsuarios', name: 'FormAddUsuarios', element: FormAddUsuarios },
   { path: '/Usuarios/editarUsuario', name: 'FormEditUsuarios', element: FormEditUsuarios },
+  //
   { path: '/Inventario/verInventario', name: 'TableInventario', element: TableInventario },
   { path: '/Inventario/crearItem', name: 'FormAddItem', element: FormAddItem },
   { path: '/Inventario/editarItem', name: 'FormEditItem', element: FormEditItem },
+  //
+  { path: '/Proveedores/verProveedores', name: 'TableProveedores', element: TableProveedores },
+  { path: '/Proveedores/crearProveedor', name: 'FormAddProveedor', element: FormAddProveedor },
+  { path: '/Proveedores/editarProveedor', name: 'FormEditProveedor', element: FormEditProveedor },
+  //
+  { path: '/Empresas/verEmpresas', name: 'TableEmpresas', element: TableEmpresas },
+  { path: '/Empresas/crearEmpresa', name: 'FormAddEmpresa', element: FormAddEmpresa },
+  { path: '/Empresas/editarEmpresa', name: 'FormEditEmpresa', element: FormEditEmpresa },
+  //
+  { path: '/Servicios/verServicios', name: 'TableServicios', element: TableServicios },
+  { path: '/Servicios/crearServicio', name: 'FormAddServicio', element: FormAddServicio },
+  { path: '/Servicios/editarServicio', name: 'FormEditServicio', element: FormEditServicio },
 ]
+
 
 export default routes

@@ -44,66 +44,7 @@ const _nav = [
         name: 'Agregar Usuarios',
         to: '/Usuarios/CrearUsuarios',
       },
-      {
-        component: CNavItem,
-        name: 'Cards',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Carousel',
-        to: '/base/carousels',
-      },
-      {
-        component: CNavItem,
-        name: 'Collapse',
-        to: '/base/collapses',
-      },
-      {
-        component: CNavItem,
-        name: 'List group',
-        to: '/base/list-groups',
-      },
-      {
-        component: CNavItem,
-        name: 'Navs & Tabs',
-        to: '/base/navs',
-      },
-      {
-        component: CNavItem,
-        name: 'Pagination',
-        to: '/base/paginations',
-      },
-      {
-        component: CNavItem,
-        name: 'Placeholders',
-        to: '/base/placeholders',
-      },
-      {
-        component: CNavItem,
-        name: 'Popovers',
-        to: '/base/popovers',
-      },
-      {
-        component: CNavItem,
-        name: 'Progress',
-        to: '/base/progress',
-      },
-      {
-        component: CNavItem,
-        name: 'Spinners',
-        to: '/base/spinners',
-      },
-      {
-        component: CNavItem,
-        name: 'Tables',
-        to: '/base/tables',
-      },
-      {
-        component: CNavItem,
-        name: 'Tooltips',
-        to: '/base/tooltips',
-      },
+      
     ],
   },
   {
@@ -122,11 +63,11 @@ const _nav = [
         name: 'Agregar Item',
         to: '/Inventario/crearItem',
       },
-      {
-        component: CNavItem,
-        name: 'Dropdowns',
-        to: '/buttons/dropdowns',
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Dropdowns',
+      //   to: '/buttons/dropdowns',
+      // },
     ],
   },
   {
@@ -136,44 +77,44 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Form Control',
-        to: '/forms/form-control',
+        name: 'Ver Proveedores',
+        to: '/Proveedores/verProveedores',
       },
       {
         component: CNavItem,
-        name: 'Select',
-        to: '/forms/select',
+        name: 'Agregar Proveedores',
+        to: '/Proveedores/crearProveedor',
       },
-      {
-        component: CNavItem,
-        name: 'Checks & Radios',
-        to: '/forms/checks-radios',
-      },
-      {
-        component: CNavItem,
-        name: 'Range',
-        to: '/forms/range',
-      },
-      {
-        component: CNavItem,
-        name: 'Input Group',
-        to: '/forms/input-group',
-      },
-      {
-        component: CNavItem,
-        name: 'Floating Labels',
-        to: '/forms/floating-labels',
-      },
-      {
-        component: CNavItem,
-        name: 'Layout',
-        to: '/forms/layout',
-      },
-      {
-        component: CNavItem,
-        name: 'Validation',
-        to: '/forms/validation',
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Checks & Radios',
+      //   to: '/forms/checks-radios',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Range',
+      //   to: '/forms/range',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Input Group',
+      //   to: '/forms/input-group',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Floating Labels',
+      //   to: '/forms/floating-labels',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Layout',
+      //   to: '/forms/layout',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Validation',
+      //   to: '/forms/validation',
+      // },
     ],
   },
   {
@@ -183,22 +124,13 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'CoreUI Free',
-        to: '/icons/coreui-icons',
-        badge: {
-          color: 'success',
-          text: 'NEW',
-        },
+        name: 'Ver Publicidades',
+        to: '/Servicios/verServicios',
       },
       {
         component: CNavItem,
-        name: 'CoreUI Flags',
-        to: '/icons/flags',
-      },
-      {
-        component: CNavItem,
-        name: 'CoreUI Brands',
-        to: '/icons/brands',
+        name: 'Agregar Publicidades',
+        to: '/Servicios/crearServicio',
       },
     ],
   },
@@ -209,24 +141,24 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Alerts',
-        to: '/notifications/alerts',
+        name: 'Ver Empresas',
+        to: '/Empresas/verEmpresas',
       },
       {
         component: CNavItem,
-        name: 'Badges',
-        to: '/notifications/badges',
+        name: 'Agregar Empresas',
+        to: '/Empresas/crearEmpresa',
       },
-      {
-        component: CNavItem,
-        name: 'Modal',
-        to: '/notifications/modals',
-      },
-      {
-        component: CNavItem,
-        name: 'Toasts',
-        to: '/notifications/toasts',
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Modal',
+      //   to: '/notifications/modals',
+      // },
+      // {
+      //   component: CNavItem,
+      //   name: 'Toasts',
+      //   to: '/notifications/toasts',
+      // },
     ],
   },
   {
@@ -239,21 +171,6 @@ const _nav = [
         component: CNavItem,
         name: 'Alerts',
         to: '/notifications/alerts',
-      },
-      {
-        component: CNavItem,
-        name: 'Badges',
-        to: '/notifications/badges',
-      },
-      {
-        component: CNavItem,
-        name: 'Modal',
-        to: '/notifications/modals',
-      },
-      {
-        component: CNavItem,
-        name: 'Toasts',
-        to: '/notifications/toasts',
       },
     ],
   }

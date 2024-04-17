@@ -14,41 +14,62 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import { ButtonLink } from '../../components/ButtonLinks';
+import axios from '../API/axios';
+const GET_URL = "/usuarios/";
+const PUT_URL = "/usuarios/";
 
 const FormEditUsuarios = () => {
 
   const token = sessionStorage.getItem('token');
-  console.log(token);
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const cedula = searchParams.get('cedula'); // Retrieve the cedula value
-  console.log(cedula);
 
-  const preloadedValues = {
-    cedula: "123456"
-  }
-  const [values, setValues] = useState({
-    cedula:'',
-    correo:'',
-    contra:'',
-    nombre:'',
-    primerApellido:'',
-    segundoApellido:'',
-    rol:''
-  })
+
+  const [nombre, setNombre] = useState();
+  const [primer_apellido, setPrimer_apellido] = useState();
+  const [segundo_apellido, setSegundo_apellido] = useState();
+  const [correo, setCorreo] = useState();
+  const [id_rol, setId_rol] = useState();
+
+
   useEffect(() => {
-    fetch('http://localhost:8008/usuarios/admins', {
-      method: "GET",
+    axios.get(GET_URL + encodeURIComponent(cedula), {
       headers: {
-        Authorization: token
+        'Content-Type': 'application/json',
+        'Authorization': token
       }
     })
-    .then(response => response.json())
-    .then(data => setRecords(data))
-    .catch(error => console.error('Error al consumir la API:', error));
-}, []); 
+    .then(response => {
+      console.log(response.data); // Handle the response data
+      setNombre(response.data.nombre)
+      setPrimer_apellido(response.data.primer_apellido)
+      setSegundo_apellido(response.data.segundo_apellido)
+      setCorreo(response.data.correo)
+      setId_rol(response.data.rol)
+    })
+    .catch(error => {
+      console.error("Error en la petición", error); // Handle the error
+    });
+  }, [cedula]);
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    axios.put(PUT_URL + encodeURIComponent(cedula), JSON.stringify({nombre, primer_apellido, segundo_apellido, correo, id_rol}), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    })
+    .then(response => {
+      console.log(JSON.stringify(response?.data))
+    })
+    .catch(error => {
+      console.log(JSON.stringify(response)) // Handle the error
+    });
+  }
 
   return (
     <CRow>
@@ -59,51 +80,74 @@ const FormEditUsuarios = () => {
           </CCardHeader>
           <CCardBody>
             <p className="text-body-secondary small">
-              Modifique los datos del usuario que desea cambiar
+              Modifique los datos del usuario que desea cambiar 
             </p>
             <br/>
-              <CForm>
+              <CForm onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <CFormLabel htmlFor="exampleFormControlInput1">Cedula</CFormLabel>
+                  <CFormLabel htmlFor="cedula">Cedula</CFormLabel>
                   <CFormInput
                     type="text"
-                    id="exampleFormControlInput1"
+                    id="cedula"
                     name="cedula"
+                    value={cedula}
+                    readOnly={true}
                   />
                 </div>
                 <div className="mb-3">
-                  <CFormLabel htmlFor="exampleFormControlInput1">Correo Electronico</CFormLabel>
+                  <CFormLabel htmlFor="email">Correo Electronico</CFormLabel>
                   <CFormInput
                     type="email"
-                    id="exampleFormControlInput2"
+                    id="email"
+                    name="email"
+                    value={correo}
+                    onChange={(e) => setCorreo(e.target.value)}
                   />
                 </div>
                 <div className="mb-3">
-                  <CFormLabel htmlFor="exampleFormControlInput1">Contrasen̄a</CFormLabel>
-                  <CFormInput
-                    type="password"
-                    id="exampleFormControlInput3"
-                  />
-                </div>
-                <div className="mb-3">
-                  <CFormLabel htmlFor="exampleFormControlInput1">Nombre</CFormLabel>
+                  <CFormLabel htmlFor="nombre">Nombre</CFormLabel>
                   <CFormInput
                     type="text"
-                    id="exampleFormControlInput1"
+                    id="nombre"
+                    name="nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
                   />
                 </div>
                 <div className="mb-3">
-                  <CFormLabel htmlFor="exampleFormControlInput1">Apellido</CFormLabel>
+                  <CFormLabel htmlFor="primerApellido">Primer Apellido</CFormLabel>
                   <CFormInput
                     type="text"
-                    id="exampleFormControlInput1"
+                    id="primerApellido"
+                    name="primerApellido"
+                    value={primer_apellido}
+                    onChange={e => setPrimer_apellido(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <CFormLabel htmlFor="segundoApellido">Segundo Apellido</CFormLabel>
+                  <CFormInput
+                    type="text"
+                    id="segundoApellido"
+                    name="segundoApellido"
+                    value={segundo_apellido}
+                    onChange={(e) => setSegundo_apellido(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <CFormLabel htmlFor="rol">Rol</CFormLabel>
+                  <CFormInput
+                    type="text"
+                    id="rol"
+                    name="rol"
+                    value={id_rol}
+                    onChange={(e) => setId_rol(e.target.value)}
                   />
                 </div>
                 <br/>
                 <div className="col-auto">
                   <div className="d-grid gap-2">
-                    <ButtonLink to={"/Usuarios/verUsuarios"} className="btn btn-primary profile-button btn-lg">Modificar Usuario</ButtonLink>
-            
+                    <button className="btn btn-primary profile-button btn-lg">Modificar Usuario</button>
                   </div>
                 </div>
                 <br/>

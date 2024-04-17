@@ -7,35 +7,40 @@ import {
   CForm,
   CFormInput,
   CFormLabel,
-  CFormTextarea,
   CRow,
 } from '@coreui/react';
 import React, { useEffect, useRef, useState } from 'react';
-import { ButtonLink } from '../../components/ButtonLinks';
 import axios from '../API/axios';
-const CREATE_URL = "/productos/";
+const CREATE_URL = "/servicios/";
 
 const token = sessionStorage.getItem('token');
   console.log(token);
 
-const FormAddItem = () => {
-
+const FormAddServicio = () => {
 
   const userRef = useRef();
+  const errRef = useRef();
 
-  const [nombre, setNombre] = useState();
+  const [titulo, setTitulo] = useState();
+  const [tiempo, setTiempo] = useState();
   const [descripcion, setDescripcion] = useState();
-  const [precio, setPrecio] = useState();
-  const [proveedores, setProveedores] = useState();
+  const [imagen, setImagen] = useState();
+  const [id_empresa, setIdEmpresa] = useState();
 
+  const [errMsg, setErrMsg] = useState();
+
+  
   useEffect(() => {
       userRef.current.focus();
   }, [])
 
+  useEffect(() => {
+      setErrMsg('');
+  }, [titulo])
 
   const handleSubmit = async (e) => {
     try{
-      const res = await axios.post(CREATE_URL, JSON.stringify({nombre, descripcion, precio, proveedores}), 
+      const res = await axios.post(CREATE_URL, JSON.stringify({titulo, tiempo, descripcion, imagen, id_empresa}), 
       {
         headers: {
           'Content-Type': 'application/json',
@@ -44,10 +49,7 @@ const FormAddItem = () => {
       });
       console.log(JSON.stringify(res?.data))
 
-      setNombre('');
-      setDescripcion('');
-      setPrecio('');
-      setProveedores('');
+      setTitulo('');
 
     }catch (err){
         console.log(JSON.stringify(res?.data))
@@ -60,29 +62,41 @@ const FormAddItem = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Agregar Items al Inventario</strong>
+            <strong>Agregar Servicios Publicitarios al Sistema</strong>
           </CCardHeader>
           <CCardBody>
             <p className="text-body-secondary small">
-              Llene los datos del item que desea agregar
+              Agregue los datos del servicio que desea agregar 
             </p>
-            <br/>
-            <CForm onSubmit={handleSubmit}>
+              <CForm onSubmit={handleSubmit}>
                 <div className="mb-3">
-                <CFormLabel htmlFor="nombre">Nombre</CFormLabel>
+                  <CFormLabel htmlFor="titulo">Titulo del Servicio</CFormLabel>
                   <CFormInput
                     className="form-control"
                     type="text"
-                    id="nombre"
+                    id="titulo"
                     ref={userRef}
                     autoComplete="off"
-                    onChange={(e) => setNombre(e.target.value)}
-                    value={nombre}
+                    onChange={(e) => setTitulo(e.target.value)}
+                    value={titulo}
                     required 
                   />
                 </div>
                 <div className="mb-3">
-                <CFormLabel htmlFor="descripcion">Descripcion</CFormLabel>
+                  <CFormLabel htmlFor="tiempo">Tiempo</CFormLabel>
+                  <CFormInput
+                    className="form-control"
+                    type="text"
+                    id="tiempo"
+                    ref={userRef}
+                    autoComplete="off"
+                    onChange={(e) => setTiempo(e.target.value)}
+                    value={tiempo}
+                    required 
+                  />
+                </div>
+                <div className="mb-3">
+                  <CFormLabel htmlFor="descripcion">Descripcion</CFormLabel>
                   <CFormInput
                     className="form-control"
                     type="text"
@@ -95,35 +109,35 @@ const FormAddItem = () => {
                   />
                 </div>
                 <div className="mb-3">
-                <CFormLabel htmlFor="precio">Precio</CFormLabel>
+                  <CFormLabel htmlFor="imagen">Imagen</CFormLabel>
                   <CFormInput
                     className="form-control"
                     type="text"
-                    id="precio"
+                    id="imagen"
                     ref={userRef}
                     autoComplete="off"
-                    onChange={(e) => setPrecio(e.target.value)}
-                    value={precio}
+                    onChange={(e) => setImagen(e.target.value)}
+                    value={imagen}
                     required 
                   />
                 </div>
                 <div className="mb-3">
-                <CFormLabel htmlFor="proveedores">Proveedores</CFormLabel>
+                  <CFormLabel htmlFor="id_empresa">Empresa</CFormLabel>
                   <CFormInput
                     className="form-control"
                     type="text"
-                    id="proveedores"
+                    id="id_empresa"
                     ref={userRef}
                     autoComplete="off"
-                    onChange={(e) => setProveedores(e.target.value)}
-                    value={proveedores}
+                    onChange={(e) => setIdEmpresa(e.target.value)}
+                    value={id_empresa}
                     required 
                   />
                 </div>
                 <br/><br/>
                 <div className="col-auto">
                   <div className="d-grid gap-2">
-                  <button className="btn btn-info profile-button btn-lg">Agregar Item</button>
+                  <button className="btn btn-info profile-button btn-lg">Agregar Servicio</button>
             
                   </div>
                 </div>
@@ -138,4 +152,5 @@ const FormAddItem = () => {
   )
 }
 
-export default FormAddItem
+export default FormAddServicio
+

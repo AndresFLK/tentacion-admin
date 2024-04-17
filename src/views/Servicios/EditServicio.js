@@ -15,46 +15,48 @@ import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import { ButtonLink } from '../../components/ButtonLinks';
 import axios from '../API/axios';
-const GET_URL = "/productos/";
-const PUT_URL = "/productos/";
+const GET_URL = "/servicios/";
+const PUT_URL = "/servicios/";
 
-const FormEditItem = () => {
+const FormEditServicio= () => {
 
   const token = sessionStorage.getItem('token');
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const idProducto = searchParams.get('id_producto'); // Retrieve the cedula value
+  const idServicio = searchParams.get('id_servicio'); // Retrieve the cedula value
 
 
+
+  const [titulo, setTitulo] = useState();
+  const [tiempo, setTiempo] = useState();
   const [descripcion, setDescripcion] = useState();
-  const [nombre, setNombre] = useState();
-  const [precio, setPrecio] = useState();
-  const [proveedores, setProveedores] = useState();
+  const [imagen, setImagen] = useState();
+  const [id_empresa, setIdEmpresa] = useState();
 
   useEffect(() => {
-    axios.get(GET_URL + encodeURIComponent(idProducto), {
+    axios.get(GET_URL + encodeURIComponent(idServicio), {
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': token
+        'Content-Type': 'application/json'
       }
     })
     .then(response => {
       console.log(response.data); // Handle the response data
-      setNombre(response.data.nombre)
+      setTitulo(response.data.titulo)
+      setTiempo(response.data.tiempo)
       setDescripcion(response.data.descripcion)
-      setPrecio(response.data.precio)
-      setProveedores(response.data.proveedores)
+      setImagen(response.data.imagen)
+      setIdEmpresa(response.data.empresa)
     })
     .catch(error => {
       console.error("Error en la petición", error); // Handle the error
     });
-  }, [idProducto]);
+  }, [idServicio]);
   
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.put(PUT_URL + encodeURIComponent(idProducto), JSON.stringify({nombre, descripcion, precio, proveedores}), {
+    axios.put(PUT_URL + encodeURIComponent(idServicio), JSON.stringify({titulo, tiempo, descripcion, imagen, id_empresa}), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': token
@@ -62,6 +64,7 @@ const FormEditItem = () => {
     })
     .then(response => {
       console.log(JSON.stringify(response?.data))
+      alert("Cambio Exitoso")
     })
     .catch(error => {
       console.log(JSON.stringify(response)) // Handle the error
@@ -73,32 +76,30 @@ const FormEditItem = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Modificar Items del Sistema</strong>
+            <strong>Modificar Servicios Publicitarios del Sistema</strong>
           </CCardHeader>
           <CCardBody>
             <p className="text-body-secondary small">
-              Modifique los datos del item del inventario que desea cambiar 
+              Modifique los datos del servicio desea cambiar 
             </p>
             <br/>
               <CForm onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <CFormLabel htmlFor="idProducto">ID</CFormLabel>
+              <div className="mb-3">
+                  <CFormLabel htmlFor="titulo">Titulo del Servicio</CFormLabel>
                   <CFormInput
                     type="text"
-                    id="idProducto"
-                    name="idProducto"
-                    value={idProducto}
-                    readOnly={true}
+                    id="titulo"
+                    onChange={(e) => setTitulo(e.target.value)}
+                    value={titulo}
                   />
                 </div>
                 <div className="mb-3">
-                  <CFormLabel htmlFor="nombre">Nombre</CFormLabel>
+                  <CFormLabel htmlFor="tiempo">Tiempo</CFormLabel>
                   <CFormInput
                     type="text"
-                    id="nombre"
-                    name="nombre"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
+                    id="tiempo"
+                    onChange={(e) => setTiempo(e.target.value)}
+                    value={tiempo}
                   />
                 </div>
                 <div className="mb-3">
@@ -106,35 +107,32 @@ const FormEditItem = () => {
                   <CFormInput
                     type="text"
                     id="descripcion"
-                    name="descripcion"
-                    value={descripcion}
                     onChange={(e) => setDescripcion(e.target.value)}
+                    value={descripcion}
                   />
                 </div>
                 <div className="mb-3">
-                  <CFormLabel htmlFor="precio">Precio</CFormLabel>
+                  <CFormLabel htmlFor="imagen">Imagen</CFormLabel>
                   <CFormInput
                     type="text"
-                    id="precio"
-                    name="precio"
-                    value={precio}
-                    onChange={e => setPrecio(e.target.value)}
+                    id="imagen"
+                    onChange={(e) => setImagen(e.target.value)}
+                    value={imagen}
                   />
                 </div>
                 <div className="mb-3">
-                  <CFormLabel htmlFor="proveedores">Proveedores</CFormLabel>
+                  <CFormLabel htmlFor="id_empresa">Empresa</CFormLabel>
                   <CFormInput
                     type="text"
-                    id="proveedores"
-                    name="proveedores"
-                    value={proveedores}
-                    onChange={(e) => setProveedores(e.target.value)}
+                    id="id_empresa"
+                    onChange={(e) => setIdEmpresa(e.target.value)}
+                    value={id_empresa}
                   />
                 </div>
                 <br/>
                 <div className="col-auto">
                   <div className="d-grid gap-2">
-                    <button className="btn btn-primary profile-button btn-lg">Modificar Item</button>
+                    <button className="btn btn-primary profile-button btn-lg">Modificar Servicio</button>
                   </div>
                 </div>
                 <br/>
@@ -148,4 +146,4 @@ const FormEditItem = () => {
   )
 }
 
-export default FormEditItem
+export default FormEditServicio

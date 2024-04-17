@@ -4,6 +4,7 @@ import {
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import {
+  CButton,
   CCard,
   CCardBody,
   CCardHeader,
@@ -11,19 +12,24 @@ import {
   CRow,
   CTable,
   CTableBody,
+  CTableCaption,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { ButtonLink } from '../../components/ButtonLinks'
 
-const TableInventario = () => {
+const TableEmpresas = () => {
+
+  const token = sessionStorage.getItem('token');
+  console.log(token);
 
   const [records, setRecords] = useState([])
     useEffect(() => {
-        fetch('http://localhost:8008/productos', {
+        fetch('http://localhost:8008/empresas', {
           method: "GET",
         })
         .then(response => response.json())
@@ -37,45 +43,31 @@ const TableInventario = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Items Activos del Inventario</strong> 
+            <strong>Empresas Activos</strong> 
           </CCardHeader>
           <CCardBody>
             <p className="text-body-secondary small">
-              Revise los items activos de la aplicación
+              Revise las empresas activas de la aplicación
             </p>
               <CTable hover>
                 <CTableHead color="primary">
                   <CTableRow>
                     <CTableHeaderCell scope="col">ID</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Nombre</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Descripcion</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Cantidad</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Precio Unitario</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Proveedores</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Contacto</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Acciones</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
                   {records.map((list, index) => (
                     <CTableRow>
-                      <CTableHeaderCell scope="row" key={index}>{list.id_producto}</CTableHeaderCell>
+                      <CTableHeaderCell scope="row" key={index}>{list.id_empresa}</CTableHeaderCell>
                       <CTableDataCell>{list.nombre}</CTableDataCell>
-                      <CTableDataCell>{list.descripcion}</CTableDataCell>
-                      <CTableDataCell>falta cantidad</CTableDataCell>
-                      <CTableDataCell>{list.precio}</CTableDataCell>
+                      <CTableDataCell>Falta contacto</CTableDataCell>
                       <CTableDataCell>
-                        <>
-                          {list.proveedores.map((proveedor, index) => (
-                            <span key={index}>
-                              {proveedor}{index < list.proveedores.length - 1 ? ', ' : ''}
-                            </span>
-                          ))}
-                        </>
-                      </CTableDataCell>
-                      <CTableDataCell>
-                      <ButtonLink to={{
-                                      pathname: "/Inventario/editarItem",
-                                      search: `?id_producto=${encodeURIComponent(list.id_producto)}`
+                        <ButtonLink to={{
+                                      pathname: "/Empresas/editarEmpresa",
+                                      search: `?id_empresa=${encodeURIComponent(list.id_empresa)}`
                                     }}
                           className="btn btn-info profile-button"
                         >
@@ -99,5 +91,5 @@ const TableInventario = () => {
   )
 }
 
-export default TableInventario
+export default TableEmpresas
 
