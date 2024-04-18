@@ -32,6 +32,7 @@ const FormEditServicio= () => {
   const [tiempo, setTiempo] = useState();
   const [descripcion, setDescripcion] = useState();
   const [imagen, setImagen] = useState();
+  const [contacto, setContacto] = useState();
   const [id_empresa, setIdEmpresa] = useState();
 
   useEffect(() => {
@@ -46,6 +47,7 @@ const FormEditServicio= () => {
       setTiempo(response.data.tiempo)
       setDescripcion(response.data.descripcion)
       setImagen(response.data.imagen)
+      setContacto(response.data.contacto)
       setIdEmpresa(response.data.empresa)
     })
     .catch(error => {
@@ -56,7 +58,7 @@ const FormEditServicio= () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.put(PUT_URL + encodeURIComponent(idServicio), JSON.stringify({titulo, tiempo, descripcion, imagen, id_empresa}), {
+    axios.put(PUT_URL + encodeURIComponent(idServicio), JSON.stringify({titulo, tiempo, descripcion, imagen, id_empresa,contacto}), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': token
@@ -127,6 +129,15 @@ const FormEditServicio= () => {
                     id="id_empresa"
                     onChange={(e) => setIdEmpresa(e.target.value)}
                     value={id_empresa}
+                  />
+                </div>
+                <div className="mb-3">
+                  <CFormLabel htmlFor="contacto">Contacto</CFormLabel>
+                  <CFormInput
+                    type="text"
+                    id="contacto"
+                    onChange={(e) => setContacto(e.target.value)}
+                    value={contacto}
                   />
                 </div>
                 <br/>

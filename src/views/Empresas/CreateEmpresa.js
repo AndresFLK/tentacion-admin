@@ -22,6 +22,7 @@ const FormAddEmpresa = () => {
   const errRef = useRef();
 
   const [nombre, setNombre] = useState();
+  const [contacto, setContacto] = useState();
   const [errMsg, setErrMsg] = useState();
 
   
@@ -36,7 +37,7 @@ const FormAddEmpresa = () => {
 //falta agregar el contacto
   const handleSubmit = async (e) => {
     try{
-      const res = await axios.post(CREATE_URL, JSON.stringify({nombre}), 
+      const res = await axios.post(CREATE_URL, JSON.stringify({nombre, contacto}), 
       {
         headers: {
           'Content-Type': 'application/json',
@@ -46,6 +47,7 @@ const FormAddEmpresa = () => {
       console.log(JSON.stringify(res?.data))
 
       setNombre('');
+      setContacto('');
 
     }catch (err){
         console.log(JSON.stringify(res?.data))
@@ -75,6 +77,19 @@ const FormAddEmpresa = () => {
                     autoComplete="off"
                     onChange={(e) => setNombre(e.target.value)}
                     value={nombre}
+                    required 
+                  />
+                </div>
+                <div className="mb-3">
+                  <CFormLabel htmlFor="contacto">Contacto</CFormLabel>
+                  <CFormInput
+                    className="form-control"
+                    type="text"
+                    id="contacto"
+                    ref={userRef}
+                    autoComplete="off"
+                    onChange={(e) => setContacto(e.target.value)}
+                    value={contacto}
                     required 
                   />
                 </div>

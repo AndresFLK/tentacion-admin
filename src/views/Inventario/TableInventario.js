@@ -61,7 +61,7 @@ const TableInventario = () => {
                       <CTableHeaderCell scope="row" key={index}>{list.id_producto}</CTableHeaderCell>
                       <CTableDataCell>{list.nombre}</CTableDataCell>
                       <CTableDataCell>{list.descripcion}</CTableDataCell>
-                      <CTableDataCell>falta cantidad</CTableDataCell>
+                      <CTableDataCell>{list.cantidad}</CTableDataCell>
                       <CTableDataCell>{list.precio}</CTableDataCell>
                       <CTableDataCell>
                         <>

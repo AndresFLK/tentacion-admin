@@ -22,14 +22,14 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { ButtonLink } from '../../components/ButtonLinks'
 
-const TableEmpresas = () => {
+const TableServicios = () => {
 
   const token = sessionStorage.getItem('token');
   console.log(token);
 
   const [records, setRecords] = useState([])
     useEffect(() => {
-        fetch('http://localhost:8008/empresas', {
+        fetch('http://localhost:8008/reservas', {
           method: "GET",
         })
         .then(response => response.json())
@@ -43,31 +43,40 @@ const TableEmpresas = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Empresas Activos</strong> 
+            <strong>Reservas Activas</strong> 
           </CCardHeader>
           <CCardBody>
             <p className="text-body-secondary small">
-              Revise las empresas activas de la aplicación
+              Revise las reservas activas de la aplicación
             </p>
               <CTable hover>
                 <CTableHead color="primary">
                   <CTableRow>
                     <CTableHeaderCell scope="col">ID</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Nombre</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Contacto</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Usuario</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Fecha</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Cantidad de Personas</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Acciones</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
                   {records.map((list, index) => (
                     <CTableRow>
-                      <CTableHeaderCell scope="row" key={index}>{list.id_empresa}</CTableHeaderCell>
-                      <CTableDataCell>{list.nombre}</CTableDataCell>
-                      <CTableDataCell>{list.contacto}</CTableDataCell>
+                      <CTableHeaderCell scope="row" key={index}>{list.id_reserva}</CTableHeaderCell>
+                      <CTableDataCell>{list.usuario}</CTableDataCell>
+                      <CTableDataCell>
+                        {new Date(list.fecha).toLocaleDateString('en-US', {
+                          weekday: 'long', // "Monday"
+                          year: 'numeric', // "2024"
+                          month: 'long', // "March"
+                          day: 'numeric' // "29"
+                        })}
+                      </CTableDataCell>
+                      <CTableDataCell>{list.nombre_reserva}</CTableDataCell>
                       <CTableDataCell>
                         <ButtonLink to={{
-                                      pathname: "/Empresas/editarEmpresa",
-                                      search: `?id_empresa=${encodeURIComponent(list.id_empresa)}`
+                                      pathname: "/Servicios/editarServicio",
+                                      search: `?id_servicio=${encodeURIComponent(list.id_servicio)}`
                                     }}
                           className="btn btn-info profile-button"
                         >
@@ -91,5 +100,5 @@ const TableEmpresas = () => {
   )
 }
 
-export default TableEmpresas
+export default TableServicios
 

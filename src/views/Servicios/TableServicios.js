@@ -55,6 +55,7 @@ const TableServicios = () => {
                     <CTableHeaderCell scope="col">ID</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Empresa</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Tiempo</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Contacto</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Acciones</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
@@ -64,6 +65,7 @@ const TableServicios = () => {
                       <CTableHeaderCell scope="row" key={index}>{list.id_servicio}</CTableHeaderCell>
                       <CTableDataCell>{list.empresa}</CTableDataCell>
                       <CTableDataCell>{list.tiempo}</CTableDataCell>
+                      <CTableDataCell>{list.contacto}</CTableDataCell>
                       <CTableDataCell>
                         <ButtonLink to={{
                                       pathname: "/Servicios/editarServicio",

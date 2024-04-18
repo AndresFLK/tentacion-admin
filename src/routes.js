@@ -29,6 +29,11 @@ const TableServicios = React.lazy(() => import('./views/Servicios/TableServicios
 const FormAddServicio = React.lazy(() => import('./views/Servicios/CreateServicio'))
 const FormEditServicio = React.lazy(() => import('./views/Servicios/EditServicio'))
 
+//Reservas
+const TableReservas = React.lazy(() => import('./views/Reservas/TableReservas'))
+//const FormAddServicio = React.lazy(() => import('./views/Servicios/CreateServicio'))
+//const FormEditServicio = React.lazy(() => import('./views/Servicios/EditServicio'))
+
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -140,6 +145,10 @@ const routes = [
   { path: '/Servicios/verServicios', name: 'TableServicios', element: TableServicios },
   { path: '/Servicios/crearServicio', name: 'FormAddServicio', element: FormAddServicio },
   { path: '/Servicios/editarServicio', name: 'FormEditServicio', element: FormEditServicio },
+  //
+  { path: '/Reservas/verReseservas', name: 'TableReservas', element: TableReservas },
+  //{ path: '/Servicios/crearServicio', name: 'FormAddServicio', element: FormAddServicio },
+  //{ path: '/Servicios/editarServicio', name: 'FormEditServicio', element: FormEditServicio },
 ]
 
 

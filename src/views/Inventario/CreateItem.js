@@ -27,6 +27,7 @@ const FormAddItem = () => {
   const [descripcion, setDescripcion] = useState();
   const [precio, setPrecio] = useState();
   const [proveedores, setProveedores] = useState();
+  const [cantidad, setCantidad] = useState();
 
   useEffect(() => {
       userRef.current.focus();
@@ -35,7 +36,7 @@ const FormAddItem = () => {
 
   const handleSubmit = async (e) => {
     try{
-      const res = await axios.post(CREATE_URL, JSON.stringify({nombre, descripcion, precio, proveedores}), 
+      const res = await axios.post(CREATE_URL, JSON.stringify({nombre, descripcion, precio, proveedores, cantidad}), 
       {
         headers: {
           'Content-Type': 'application/json',
@@ -47,6 +48,7 @@ const FormAddItem = () => {
       setNombre('');
       setDescripcion('');
       setPrecio('');
+      setCantidad('');
       setProveedores('');
 
     }catch (err){
@@ -91,6 +93,19 @@ const FormAddItem = () => {
                     autoComplete="off"
                     onChange={(e) => setDescripcion(e.target.value)}
                     value={descripcion}
+                    required 
+                  />
+                </div>
+                <div className="mb-3">
+                <CFormLabel htmlFor="cantidad">Cantidad</CFormLabel>
+                  <CFormInput
+                    className="form-control"
+                    type="text"
+                    id="cantidad"
+                    ref={userRef}
+                    autoComplete="off"
+                    onChange={(e) => setCantidad(e.target.value)}
+                    value={cantidad}
                     required 
                   />
                 </div>

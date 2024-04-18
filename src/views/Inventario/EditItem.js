@@ -31,6 +31,7 @@ const FormEditItem = () => {
   const [nombre, setNombre] = useState();
   const [precio, setPrecio] = useState();
   const [proveedores, setProveedores] = useState();
+  const [cantidad, setCantidad] = useState();
 
   useEffect(() => {
     axios.get(GET_URL + encodeURIComponent(idProducto), {
@@ -43,6 +44,7 @@ const FormEditItem = () => {
       console.log(response.data); // Handle the response data
       setNombre(response.data.nombre)
       setDescripcion(response.data.descripcion)
+      setCantidad(response.data.cantidad)
       setPrecio(response.data.precio)
       setProveedores(response.data.proveedores)
     })
@@ -54,7 +56,7 @@ const FormEditItem = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.put(PUT_URL + encodeURIComponent(idProducto), JSON.stringify({nombre, descripcion, precio, proveedores}), {
+    axios.put(PUT_URL + encodeURIComponent(idProducto), JSON.stringify({nombre, descripcion, precio, proveedores, cantidad}), {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': token
@@ -62,6 +64,7 @@ const FormEditItem = () => {
     })
     .then(response => {
       console.log(JSON.stringify(response?.data))
+      alert("Modificacion Exitosa")
     })
     .catch(error => {
       console.log(JSON.stringify(response)) // Handle the error
@@ -109,6 +112,16 @@ const FormEditItem = () => {
                     name="descripcion"
                     value={descripcion}
                     onChange={(e) => setDescripcion(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <CFormLabel htmlFor="cantidad">Cantidad</CFormLabel>
+                  <CFormInput
+                    type="text"
+                    id="cantidad"
+                    name="cantidad"
+                    value={cantidad}
+                    onChange={(e) => setCantidad(e.target.value)}
                   />
                 </div>
                 <div className="mb-3">

@@ -1,19 +1,8 @@
 import {
-  cibSuperuser,
-  cilBell,
   cilBuilding,
-  cilCalculator,
-  cilChartPie,
-  cilCursor,
-  cilDescription,
-  cilDiamond,
-  cilDrop,
+  cilCalendarCheck,
   cilInbox,
-  cilNotes,
-  cilPencil,
-  cilPuzzle,
   cilRestaurant,
-  cilSpeedometer,
   cilStar,
   cilTruck,
   cilUser
@@ -159,6 +148,19 @@ const _nav = [
       //   name: 'Toasts',
       //   to: '/notifications/toasts',
       // },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Reservas',
+    to: '/widgets',
+    icon: <CIcon icon={cilCalendarCheck} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Ver Reservas',
+        to: '/Reservas/verReseservas',
+      },
     ],
   },
   {

@@ -25,6 +25,7 @@ const FormAddServicio = () => {
   const [tiempo, setTiempo] = useState();
   const [descripcion, setDescripcion] = useState();
   const [imagen, setImagen] = useState();
+  const [contacto, setContacto] = useState();
   const [id_empresa, setIdEmpresa] = useState();
 
   const [errMsg, setErrMsg] = useState();
@@ -40,7 +41,7 @@ const FormAddServicio = () => {
 
   const handleSubmit = async (e) => {
     try{
-      const res = await axios.post(CREATE_URL, JSON.stringify({titulo, tiempo, descripcion, imagen, id_empresa}), 
+      const res = await axios.post(CREATE_URL, JSON.stringify({titulo, tiempo, descripcion, imagen, id_empresa, contacto}), 
       {
         headers: {
           'Content-Type': 'application/json',
@@ -131,6 +132,19 @@ const FormAddServicio = () => {
                     autoComplete="off"
                     onChange={(e) => setIdEmpresa(e.target.value)}
                     value={id_empresa}
+                    required 
+                  />
+                </div>
+                <div className="mb-3">
+                  <CFormLabel htmlFor="contacto">Contacto</CFormLabel>
+                  <CFormInput
+                    className="form-control"
+                    type="text"
+                    id="contacto"
+                    ref={userRef}
+                    autoComplete="off"
+                    onChange={(e) => setContacto(e.target.value)}
+                    value={contacto}
                     required 
                   />
                 </div>
