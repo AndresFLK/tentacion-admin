@@ -18,6 +18,9 @@ import {
 } from '@coreui/react'
 import React, { useEffect, useState } from 'react'
 import { ButtonLink } from '../../components/ButtonLinks'
+import axios from '../API/axios'
+
+const DELETE_URL = "/proveedores/";
   
   const TableProveedores = () => {
   
@@ -34,6 +37,22 @@ import { ButtonLink } from '../../components/ButtonLinks'
           .catch(error => console.error('Error al consumir la API:', error));
     }, []); // The empty array causes this effect to only run on mount
   
+
+    const borrar = async (id_proveedor) => {
+      try{
+        const res = await axios.delete(DELETE_URL + id_proveedor, 
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${token}`
+          }
+        });
+        alert("Proveedor Borrado")
+  
+      }catch (err){
+          console.error("Error en la petición", err);
+      }
+    }
   
     return (
       <CRow>
@@ -70,10 +89,8 @@ import { ButtonLink } from '../../components/ButtonLinks'
                             Editar
                           </ButtonLink>
                           <span> </span>
-                          <ButtonLink to={"/Usuarios/editarUsuario"} className="btn btn-danger profile-button">
-                            <CIcon icon={cilTrash} className="me-2" />
-                            Borrar
-                          </ButtonLink>
+                          <button className="btn btn-danger profile-button" onClick={() => borrar(list.id_proveedor)}><CIcon icon={cilTrash} className="me-2" />
+                          Borrar</button>
                         </CTableDataCell>
                       </CTableRow>
                     ))}

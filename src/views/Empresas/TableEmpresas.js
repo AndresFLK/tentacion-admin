@@ -21,6 +21,9 @@ import {
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { ButtonLink } from '../../components/ButtonLinks'
+import route from '../API/axios'
+
+const DELETE_URL = "/empresas/";
 
 const TableEmpresas = () => {
 
@@ -37,6 +40,22 @@ const TableEmpresas = () => {
         .catch(error => console.error('Error al consumir la API:', error));
     }, []); // The empty array causes this effect to only run on mount
 
+
+    const borrar = async (id_empresa) => {
+      try{
+        const res = await route.delete(DELETE_URL + id_empresa, 
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${token}`
+          }
+        });
+        alert("Empresa Borrada")
+  
+      }catch (err){
+          console.error("Error en la petición", err);
+      }
+    }
 
   return (
     <CRow>
@@ -75,10 +94,8 @@ const TableEmpresas = () => {
                           Editar
                         </ButtonLink>
                         <span> </span>
-                        <ButtonLink to={"/Usuarios/editarUsuario"} className="btn btn-danger profile-button">
-                          <CIcon icon={cilTrash} className="me-2" />
-                          Borrar
-                        </ButtonLink>
+                        <button className="btn btn-danger profile-button" onClick={() => borrar(list.id_empresa)}><CIcon icon={cilTrash} className="me-2" />
+                          Borrar</button>
                       </CTableDataCell>
                     </CTableRow>
                   ))}

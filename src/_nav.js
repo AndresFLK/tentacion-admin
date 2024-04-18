@@ -25,8 +25,13 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Ver Usuarios',
-        to: '/Usuarios/VerUsuarios',
+        name: 'Ver Administradores',
+        to: '/Usuarios/VerAdministradores',
+      },
+      {
+        component: CNavItem,
+        name: 'Ver Clientes',
+        to: '/Usuarios/VerClientes',
       },
       {
         component: CNavItem,
@@ -163,19 +168,7 @@ const _nav = [
       },
     ],
   },
-  {
-    component: CNavGroup,
-    name: 'Ordenes',
-    to: '/widgets',
-    icon: <CIcon icon={cilRestaurant} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Alerts',
-        to: '/notifications/alerts',
-      },
-    ],
-  }
+  
 ]
 
 export default _nav

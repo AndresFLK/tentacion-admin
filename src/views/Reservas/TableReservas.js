@@ -22,7 +22,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { ButtonLink } from '../../components/ButtonLinks'
 
-const TableServicios = () => {
+const TableReservas = () => {
 
   const token = sessionStorage.getItem('token');
   console.log(token);
@@ -100,5 +100,5 @@ const TableServicios = () => {
   )
 }
 
-export default TableServicios
+export default TableReservas
 

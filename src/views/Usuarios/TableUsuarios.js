@@ -21,6 +21,9 @@ import {
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { ButtonLink } from '../../components/ButtonLinks'
+import route from '../API/axios'
+
+const DELETE_URL = "/usuarios/";
 
 const TableUsuarios = () => {
 
@@ -41,6 +44,23 @@ const TableUsuarios = () => {
     }, []); // The empty array causes this effect to only run on mount
 
 
+    const borrar = async (cedula) => {
+      try{
+        const res = await route.delete(DELETE_URL + cedula, 
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${token}`
+          }
+        });
+        alert("Usuario Borrado")
+  
+      }catch (err){
+          console.error("Error en la petición", err);
+      }
+    }
+
+
   return (
     <CRow>
       <CCol xs={12}>
@@ -55,11 +75,9 @@ const TableUsuarios = () => {
               <CTable hover>
                 <CTableHead color="primary">
                   <CTableRow>
-                    <CTableHeaderCell scope="col">ID</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Cedula</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Nombre</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Correo</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Telefono</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Rol</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Acciones</CTableHeaderCell>
                   </CTableRow>
@@ -67,11 +85,9 @@ const TableUsuarios = () => {
                 <CTableBody>
                   {records.map((list, index) => (
                     <CTableRow>
-                      <CTableHeaderCell scope="row" key={index}>id</CTableHeaderCell>
                       <CTableDataCell>{list.cedula}</CTableDataCell>
                       <CTableDataCell>{list.nombre}  {list.primer_apellido}</CTableDataCell>
                       <CTableDataCell>{list.correo}</CTableDataCell>
-                      <CTableDataCell>tel</CTableDataCell>
                       <CTableDataCell>{list.rol}</CTableDataCell>
                       <CTableDataCell>
                         <ButtonLink to={{
@@ -84,10 +100,8 @@ const TableUsuarios = () => {
                           Editar
                         </ButtonLink>
                         <span> </span>
-                        <ButtonLink to={"/Usuarios/editarUsuario"} className="btn btn-danger profile-button">
-                          <CIcon icon={cilTrash} className="me-2" />
-                          Borrar
-                        </ButtonLink>
+                        <button className="btn btn-danger profile-button" onClick={() => borrar(list.cedula)}><CIcon icon={cilTrash} className="me-2" />
+                          Borrar</button>
                       </CTableDataCell>
                     </CTableRow>
                   ))}

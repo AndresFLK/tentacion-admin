@@ -4,6 +4,7 @@ import {
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import {
+  CButton,
   CCard,
   CCardBody,
   CCardHeader,
@@ -11,40 +12,48 @@ import {
   CRow,
   CTable,
   CTableBody,
+  CTableCaption,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { ButtonLink } from '../../components/ButtonLinks'
-import axios from '../API/axios'
+import route from '../API/axios'
 
-const DELETE_URL = "/productos/";
+const DELETE_URL = "/usuarios/";
 
-const TableInventario = () => {
+const TableClientes = () => {
+
   const token = sessionStorage.getItem('token');
+  console.log(token);
 
   const [records, setRecords] = useState([])
     useEffect(() => {
-        fetch('http://localhost:8008/productos', {
+        fetch('http://localhost:8008/usuarios/clientes', {
           method: "GET",
+          headers: {
+            Authorization: token
+          }
         })
         .then(response => response.json())
         .then(data => setRecords(data))
         .catch(error => console.error('Error al consumir la API:', error));
     }, []); // The empty array causes this effect to only run on mount
 
-    const borrar = async (id_producto) => {
+
+    const borrar = async (cedula) => {
       try{
-        const res = await axios.delete(DELETE_URL + id_producto, 
+        const res = await route.delete(DELETE_URL + cedula, 
         {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `${token}`
           }
         });
-        alert("Producto Borrado")
+        alert("Usuario Borrado")
   
       }catch (err){
           console.error("Error en la petición", err);
@@ -57,45 +66,33 @@ const TableInventario = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Items Activos del Inventario</strong> 
+            <strong>Usuarios Activos</strong> 
           </CCardHeader>
           <CCardBody>
             <p className="text-body-secondary small">
-              Revise los items activos de la aplicación
+              Revise los usuarios activos de la aplicación
             </p>
               <CTable hover>
                 <CTableHead color="primary">
                   <CTableRow>
-                    <CTableHeaderCell scope="col">ID</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Cedula</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Nombre</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Descripcion</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Cantidad</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Precio Unitario</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Proveedores</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Correo</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Rol</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Acciones</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
                   {records.map((list, index) => (
                     <CTableRow>
-                      <CTableHeaderCell scope="row" key={index}>{list.id_producto}</CTableHeaderCell>
-                      <CTableDataCell>{list.nombre}</CTableDataCell>
-                      <CTableDataCell>{list.descripcion}</CTableDataCell>
-                      <CTableDataCell>{list.cantidad}</CTableDataCell>
-                      <CTableDataCell>{list.precio}</CTableDataCell>
+                      <CTableDataCell>{list.cedula}</CTableDataCell>
+                      <CTableDataCell>{list.nombre}  {list.primer_apellido}</CTableDataCell>
+                      <CTableDataCell>{list.correo}</CTableDataCell>
+                      <CTableDataCell>{list.rol}</CTableDataCell>
                       <CTableDataCell>
-                        <>
-                          {list.proveedores.map((proveedor, index) => (
-                            <span key={index}>
-                              {proveedor}{index < list.proveedores.length - 1 ? ', ' : ''}
-                            </span>
-                          ))}
-                        </>
-                      </CTableDataCell>
-                      <CTableDataCell>
-                      <ButtonLink to={{
-                                      pathname: "/Inventario/editarItem",
-                                      search: `?id_producto=${encodeURIComponent(list.id_producto)}`
+                        <ButtonLink to={{
+                                      pathname: "/Usuarios/editarUsuario",
+                                      search: `?cedula=${encodeURIComponent(list.cedula)}`
                                     }}
                           className="btn btn-info profile-button"
                         >
@@ -103,7 +100,7 @@ const TableInventario = () => {
                           Editar
                         </ButtonLink>
                         <span> </span>
-                        <button className="btn btn-danger profile-button" onClick={() => borrar(list.id_producto)}><CIcon icon={cilTrash} className="me-2" />
+                        <button className="btn btn-danger profile-button" onClick={() => borrar(list.cedula)}><CIcon icon={cilTrash} className="me-2" />
                           Borrar</button>
                       </CTableDataCell>
                     </CTableRow>
@@ -117,5 +114,5 @@ const TableInventario = () => {
   )
 }
 
-export default TableInventario
+export default TableClientes
 

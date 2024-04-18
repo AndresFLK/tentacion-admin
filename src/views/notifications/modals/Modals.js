@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import {
   CButton,
   CCard,
@@ -15,6 +14,7 @@ import {
   CRow,
   CTooltip,
 } from '@coreui/react'
+import React, { useState } from 'react'
 import { DocsExample } from 'src/components'
 
 const LiveDemo = () => {
@@ -22,7 +22,7 @@ const LiveDemo = () => {
   return (
     <>
       <CButton color="primary" onClick={() => setVisible(!visible)}>
-        Launch demo modal
+        Launch demo modals
       </CButton>
       <CModal visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader>
@@ -45,7 +45,7 @@ const StaticBackdrop = () => {
   return (
     <>
       <CButton color="primary" onClick={() => setVisible(!visible)}>
-        Launch static backdrop modal
+        Launch static backdrop modalf
       </CButton>
       <CModal backdrop="static" visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader>

@@ -6,6 +6,7 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 
 //Usuarios
 const TableUsuarios = React.lazy(() => import('./views/Usuarios/TableUsuarios'))
+const TableClientes = React.lazy(() => import('./views/Usuarios/TableClientes'))
 const FormAddUsuarios = React.lazy(() => import('./views/Usuarios/CreateUsuario'))
 const FormEditUsuarios = React.lazy(() => import('./views/Usuarios/EditUsuario'))
 
@@ -126,7 +127,8 @@ const routes = [
   { path: '/notifications/toasts', name: 'Toasts', element: Toasts },
   { path: '/widgets', name: 'Widgets', element: Widgets },
   //
-  { path: '/Usuarios/verUsuarios', name: 'TableUsuarios', element: TableUsuarios },
+  { path: '/Usuarios/verClientes', name: 'TableClientes', element: TableClientes },
+  { path: '/Usuarios/verAdministradores', name: 'TableUsuarios', element: TableUsuarios },
   { path: '/Usuarios/crearUsuarios', name: 'FormAddUsuarios', element: FormAddUsuarios },
   { path: '/Usuarios/editarUsuario', name: 'FormEditUsuarios', element: FormEditUsuarios },
   //
